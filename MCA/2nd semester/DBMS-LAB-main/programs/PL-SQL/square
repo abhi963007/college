@@ -1,0 +1,14 @@
+
+SQL> DECLARE
+  2       a number;
+  3    PROCEDURE squareNum(x IN OUT number) IS
+  4    BEGIN
+  5      x := x * x;
+  6    END;
+  7    BEGIN
+  8       a:= 21;
+  9       squareNum(a);
+ 10       dbms_output.put_line(' Square of (21): ' || a);
+ 11    END;
+ 12    /
+Square of (21): 441

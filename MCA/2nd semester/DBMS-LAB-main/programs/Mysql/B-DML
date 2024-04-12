@@ -1,0 +1,182 @@
+mysql> use mlm;
+Database changed
+mysql> create table Employee(Emp_no int primary key,E_name varchar(50) not null,salary int);
+Query OK, 0 rows affected (0.07 sec)
+
+mysql>  create table department(Emp_no int primary key,emp_name varchar(30),dept_name varchar(50));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into Employee values(200,'diya',50000);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into Employee values(201,'miya',10000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Employee values(202,'sreya',20000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Employee values(203,'aparna',10000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Employee values(204,'ahana',60000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Employee values(205,'meena',80000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO department VALUES (201,'dq','IT'),(202,'raju','HR'),(203,'arjun','Finance'),(204,'varun','Marketing'),(205,'vishnu','Sales');
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from Employee;
++--------+--------+--------+
+| Emp_no | E_name | salary |
++--------+--------+--------+
+|    200 | diya   |  50000 |
+|    201 | miya   |  10000 |
+|    202 | sreya  |  20000 |
+|    203 | aparna |  10000 |
+|    204 | ahana  |  60000 |
+|    205 | meena  |  80000 |
++--------+--------+--------+
+6 rows in set (0.00 sec)
+
+mysql> select * from department;
++--------+----------+-----------+
+| Emp_no | emp_name | dept_name |
++--------+----------+-----------+
+|    201 | dq       | IT        |
+|    202 | raju     | HR        |
+|    203 | arjun    | Finance   |
+|    204 | varun    | Marketing |
+|    205 | vishnu   | Sales     |
++--------+----------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> update Employee set E_name = 'NEW Name' WHERE Emp_no = 202;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from Employee;
++--------+----------+--------+
+| Emp_no | E_name   | salary |
++--------+----------+--------+
+|    200 | diya     |  50000 |
+|    201 | miya     |  10000 |
+|    202 | NEW Name |  20000 |
+|    203 | aparna   |  10000 |
+|    204 | ahana    |  60000 |
+|    205 | meena    |  80000 |
++--------+----------+--------+
+6 rows in set (0.00 sec)
+
+mysql> delete from department where emp_name = 'raju';
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from department;
++--------+----------+-----------+
+| Emp_no | emp_name | dept_name |
++--------+----------+-----------+
+|    201 | dq       | IT        |
+|    203 | arjun    | Finance   |
+|    204 | varun    | Marketing |
+|    205 | vishnu   | Sales     |
++--------+----------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> alter table department add salary int;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> update department set salary =50000 where Emp_no = 201;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update department set salary =60000 where Emp_no = 203;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update department set salary =80000 where Emp_no = 204;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update department set salary =12000 where Emp_no = 205;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from department;
++--------+----------+-----------+--------+
+| Emp_no | emp_name | dept_name | salary |
++--------+----------+-----------+--------+
+|    201 | dq       | IT        |  50000 |
+|    203 | arjun    | Finance   |  60000 |
+|    204 | varun    | Marketing |  80000 |
+|    205 | vishnu   | Sales     |  12000 |
++--------+----------+-----------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select Emp_no,salary from department;
++--------+--------+
+| Emp_no | salary |
++--------+--------+
+|    201 |  50000 |
+|    203 |  60000 |
+|    204 |  80000 |
+|    205 |  12000 |
++--------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select E_name as ename, Salary as sal from Employee;
++----------+-------+
+| ename    | sal   |
++----------+-------+
+| diya     | 50000 |
+| miya     | 10000 |
+| NEW Name | 20000 |
+| aparna   | 10000 |
+| ahana    | 60000 |
+| meena    | 80000 |
++----------+-------+
+6 rows in set (0.00 sec)
+
+mysql> insert into Employee values(NULL,'anan',NULL);
+ERROR 1048 (23000): Column 'Emp_no' cannot be null
+mysql> insert into Employee values(206,'anan',NULL);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Employee values(201,'miya',20000);
+ERROR 1062 (23000): Duplicate entry '201' for key 'employee.PRIMARY'
+mysql>  select E_name from Employee where Emp_no = 204;
++--------+
+| E_name |
++--------+
+| ahana  |
++--------+
+1 row in set (0.00 sec)
+
+mysql> select E_name from Employee where salary = 10000;
++--------+
+| E_name |
++--------+
+| miya   |
+| aparna |
++--------+
+2 rows in set (0.00 sec)
+
+mysql>  update Employee set salary = 50000 where Emp_no = 205;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from Employee;
++--------+----------+--------+
+| Emp_no | E_name   | salary |
++--------+----------+--------+
+|    200 | diya     |  50000 |
+|    201 | miya     |  10000 |
+|    202 | NEW Name |  20000 |
+|    203 | aparna   |  10000 |
+|    204 | ahana    |  60000 |
+|    205 | meena    |  50000 |
+|    206 | anan     |   NULL |
++--------+----------+--------+
+7 rows in set (0.00 sec)

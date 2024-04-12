@@ -1,0 +1,67 @@
+
+SQL> set serveroutput on
+SQL>  CREATE OR REPLACE PROCEDURE greetings
+  2    AS
+  3    BEGIN
+  4       dbms_output.put_line('Hello World!');
+  5    END;
+  6   /
+
+Procedure created.
+
+SQL> execute greetings
+Hello World!
+
+PL/SQL procedure successfully completed.
+
+SQL> CREATE OR REPLACE PROCEDURE test1 IS
+  2  begin
+  3  dbms_output.put_line('test sucess');
+  4  end;
+  5  /
+
+Procedure created.
+
+SQL> execute test1
+test sucess
+
+PL/SQL procedure successfully completed.
+
+SQL> create table dept(eid int,ename varchar(30),psal int,ploc varchar(40));
+
+Table created.
+
+SQL> CREATE OR REPLACE PROCEDURE addemp
+  2  (depid IN dept.eid%TYPE,
+  3  depname IN dept.ename%TYPE,
+  4  depsal IN dept.psal%TYPE,
+  5  deploc IN dept.ploc%TYPE)
+  6  IS
+  7  BEGIN
+  8  INSERT INTO dept Values(depid,depname,depsal,deploc);
+  9  dbms_output.Put_line('dpmt added');
+ 10  end;
+ 11  /
+
+Procedure created.
+
+SQL> execute addemp(2,'MARY',3000,'klm');
+dpmt added
+
+PL/SQL procedure successfully completed.
+
+SQL> BEGIN
+  2       greetings;
+  3    END;
+  4   /
+Hello World!
+
+PL/SQL procedure successfully completed.
+
+SQL> DROP PROCEDURE addemp;
+
+Procedure dropped.
+
+SQL> DROP PROCEDURE greetings;
+
+Procedure dropped.

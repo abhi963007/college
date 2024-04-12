@@ -1,0 +1,24 @@
+
+SQL> create table Employees(eid int,fname varchar(30),salary int);
+
+Table created.
+
+SQL> insert into Employees values(100,'ram',30000);
+
+1 row created.
+
+SQL>  insert into Employees values(101,'sam',4000);
+
+1 row created.
+
+SQL>  declare
+  2      name varchar(10);
+  3      sal int(20);
+  4      begin
+  5      select fname,salary into name,sal from Employees where eid=100;
+  6      dbms_output.Put_line('Name:'||name);
+  7      dbms_output.Put_line('Salary:'||sal);
+  8      end;
+  9      /
+Name:ram
+Salary:30000

@@ -1,0 +1,66 @@
+                         IMPLICIT
+            PROGRAM TO UPDATE DATA IN A TABLE USING CURSOR
+
+SQL> select * from customers;
+
+        ID NAME                 DPMT                     SALARY
+---------- -------------------- -------------------- ----------
+         1 sneha                mba                       30000
+         2 diya                 mca                       80000
+         3 ahana                cs                        90000
+         4 neha                 btech                     70000
+
+SQL> declare
+  2  total_rows number(4);
+  3  begin
+  4  update customers
+  5  SET salary = salary + 5000;
+  6  IF sql%notfound THEN
+  7  dbms_output.put_line('no customers updated');
+  8  ELSIF sql%found THEN
+  9  total_rows := sql%rowcount;
+ 10  dbms_output.put_line( total_rows || ' customers updated ');
+ 11  end if;
+ 12  end;
+ 13  /
+
+     OUTPUT
+4 customers updated
+
+PL/SQL procedure successfully completed.
+
+SQL> select * from customers;
+
+        ID NAME                 DPMT                     SALARY
+---------- -------------------- -------------------- ----------
+         1 sneha                mba                       35000
+         2 diya                 mca                       85000
+         3 ahana                cs                        95000
+         4 neha                 btech                     75000
+-------------------------------------------------------------------------------------------------------------
+                           EXPLICIT
+        PROGRAM TO RETRIEVE ID,NAME AND SALARY FROM TABLE USING CUSTOMERS
+
+SQL> declare
+  2  c_id customers.id%type;
+  3  c_name customers.name%type;
+  4  c_salary customers.salary%type;
+  5  cursor c_customers is
+  6  select id,name,salary from customers;
+  7  begin
+  8  open c_customers;
+  9  loop
+ 10  fetch c_customers into c_id,c_name,c_salary;
+ 11  exit when c_customers%notfound;
+ 12  dbms_output.put_line(c_id || ' ' || c_name || ' ' || c_salary);
+ 13  end loop;
+ 14  close c_customers;
+ 15  end;
+ 16  /
+1 sneha 35000
+2 diya 85000
+3 ahana 95000
+4 neha 75000
+
+PL/SQL procedure successfully completed.
+SQL>

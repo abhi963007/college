@@ -1,0 +1,127 @@
+mysql> use employee;
+Database changed
+mysql> create table dept(deptno int,dname varchar(30),loc varchar(30));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into dept values(10,'marketing','kerala');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into dept values(11,'IT','hyderabad');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into dept values(12,'sales','behrain');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into dept values(13,'finance','uae');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into dept values(14,'purchase','gujarat');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> create table emp(empno int,ename varchar(60),job varchar(30),mgr varchar(40),hiredate decimal(10,2),sal decimal(1
+0,2),comm decimal(10,2),deptno int);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> create table empp(empno int,ename varchar(60),job varchar(30),mgr varchar(40),hiredate decimal(10,2),sal decimal(
+10,2),comm decimal(10,2),deptno int);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create table emp(empno int,ename varchar(60),job varchar(30),mgr varchar(40),hiredate DATE,sal decimal(10,2),comm
+ decimal(10,2),deptno int);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into emp values(1,'aparna','data analyst','manager1','2002-05-02',60000,1000,2);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into emp values(2,'ahana','tester','manager2','2006-06-03',70000,4000,4);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into emp values(3,'hana','coder','manager2','2011-06-09',34000,2000,3);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into emp values(4,'vishnu','engineer','manager1','2016-09-05',68000,2000,2);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into emp values(5,'krishna','supervisor','manager2','2017-12-08',117000,1000,1);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from dept;
++--------+-----------+-----------+
+| deptno | dname     | loc       |
++--------+-----------+-----------+
+|     10 | marketing | kerala    |
+|     11 | IT        | hyderabad |
+|     12 | sales     | behrain   |
+|     13 | finance   | uae       |
+|     14 | purchase  | gujarat   |
++--------+-----------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select * from emp;
++-------+---------+--------------+----------+------------+-----------+---------+--------+
+| empno | ename   | job          | mgr      | hiredate   | sal       | comm    | deptno |
++-------+---------+--------------+----------+------------+-----------+---------+--------+
+|     1 | aparna  | data analyst | manager1 | 2002-05-02 |  60000.00 | 1000.00 |      2 |
+|     2 | ahana   | tester       | manager2 | 2006-06-03 |  70000.00 | 4000.00 |      4 |
+|     3 | hana    | coder        | manager2 | 2011-06-09 |  34000.00 | 2000.00 |      3 |
+|     4 | vishnu  | engineer     | manager1 | 2016-09-05 |  68000.00 | 2000.00 |      2 |
+|     5 | krishna | supervisor   | manager2 | 2017-12-08 | 117000.00 | 1000.00 |      1 |
++-------+---------+--------------+----------+------------+-----------+---------+--------+
+5 rows in set (0.01 sec)
+
+mysql> update emp set sal=sal*1.15 where hiredate<CURDATE()-interval 10 year;
+Query OK, 3 rows affected (0.01 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select * from emp;
++-------+---------+--------------+----------+------------+-----------+---------+--------+
+| empno | ename   | job          | mgr      | hiredate   | sal       | comm    | deptno |
++-------+---------+--------------+----------+------------+-----------+---------+--------+
+|     1 | aparna  | data analyst | manager1 | 2002-05-02 |  69000.00 | 1000.00 |      2 |
+|     2 | ahana   | tester       | manager2 | 2006-06-03 |  80500.00 | 4000.00 |      4 |
+|     3 | hana    | coder        | manager2 | 2011-06-09 |  39100.00 | 2000.00 |      3 |
+|     4 | vishnu  | engineer     | manager1 | 2016-09-05 |  68000.00 | 2000.00 |      2 |
+|     5 | krishna | supervisor   | manager2 | 2017-12-08 | 117000.00 | 1000.00 |      1 |
++-------+---------+--------------+----------+------------+-----------+---------+--------+
+5 rows in set (0.00 sec)
+
+mysql> delete from emp where hiredate<=CURDATE()-interval 30 year;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> update emp set hiredate='1990-01-03' where ename='hana';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> delete from emp where hiredate<=CURDATE()-interval 30 year;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from emp;
++-------+---------+--------------+----------+------------+-----------+---------+--------+
+| empno | ename   | job          | mgr      | hiredate   | sal       | comm    | deptno |
++-------+---------+--------------+----------+------------+-----------+---------+--------+
+|     1 | aparna  | data analyst | manager1 | 2002-05-02 |  69000.00 | 1000.00 |      2 |
+|     2 | ahana   | tester       | manager2 | 2006-06-03 |  80500.00 | 4000.00 |      4 |
+|     4 | vishnu  | engineer     | manager1 | 2016-09-05 |  68000.00 | 2000.00 |      2 |
+|     5 | krishna | supervisor   | manager2 | 2017-12-08 | 117000.00 | 1000.00 |      1 |
++-------+---------+--------------+----------+------------+-----------+---------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select mgr, COUNT(empno) AS num_employees from emp group by mgr order by  num_employees desc limit 1;
++----------+---------------+
+| mgr      | num_employees |
++----------+---------------+
+| manager1 |             2 |
++----------+---------------+
+1 row in set (0.01 sec)
+
+mysql>mysql> select * from emp mgrView;
++----------------+--------------+
+| ename          | mgr          |
++----------------+--------------+
+| aparna         | manager1     |
+| ahana          | manager2     |
+| vishnu         | manager1     |
+| krishna        | manager2     |
++----------------+--------------+
+4 rows in set (0.06 sec)
+

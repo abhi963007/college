@@ -1,0 +1,15 @@
+
+SQL> declare
+  2  x number(5);
+  3  y number(5);
+  4  z number(7);
+  5  begin
+  6  x:=10;
+  7   y:=20;
+  8  z:=x+y;
+  9  dbms_output.put_line('Sum is '||z);
+ 10  end;
+ 11  /
+Sum is 30
+
+PL/SQL procedure successfully completed.

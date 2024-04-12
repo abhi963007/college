@@ -1,0 +1,50 @@
+PL/SQL program to create a row level trigger for the CUSTOMERS table that would fire forINSERT or UPDATE
+or DELETE operations performed on the CUSTOMERS table.This trigger will display the salary difference bet
+ween the old values and new value.
+-------------------------------------------------------------------------------------------------------------
+SQL> create or replace trigger salaryupdate
+  2  before delete or insert or update on customers
+  3  for each row
+  4  when (new.id > 0)
+  5  declare
+  6  sal_diff number;
+  7  begin
+  8  sal_diff := :NEW.salary - :OLD.salary;
+  9  dbms_output.put_line('Old salary: ' || :OLD.salary);
+ 10  dbms_output.put_line('New salary: ' || :NEW.salary);
+ 11  dbms_output.put_line('Salary difference: ' || sal_diff);
+ 12  end;
+ 13  /
+
+Trigger created.
+
+SQL> declare
+  2  total_rows number(2);
+  3  begin
+  4  update customers
+  5  set salary=5000;
+  6  if sql%notfound then
+  7  dbms_output.put_line('no customers updated');
+  8  elsif sql%found then
+  9  total_rows := sql%rowcount;
+ 10  dbms_output.put_line( total_rows || ' customers updated ');
+ 11  end if;
+ 12  end;
+ 13  /
+
+    OUTPUT
+Old salary: 35000
+New salary: 5000
+Salary difference: -30000
+Old salary: 85000
+New salary: 5000
+Salary difference: -80000
+Old salary: 95000
+New salary: 5000
+Salary difference: -90000
+Old salary: 75000
+New salary: 5000
+Salary difference: -70000
+4 customers updated
+
+PL/SQL procedure successfully completed.

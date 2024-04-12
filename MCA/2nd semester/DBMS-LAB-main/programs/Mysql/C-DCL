@@ -1,0 +1,42 @@
+mysql> create user 'suhana_mca'@'localhost' identified by 'suhana123';
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> show grants for 'suhana_mca'@'localhost';
++------------------------------------------------+
+| Grants for suhana_mca@localhost                |
++------------------------------------------------+
+| GRANT USAGE ON *.* TO `suhana_mca`@`localhost` |
++------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> grant all privileges on mlm.deparment to 'suhana_mca'@'localhost';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> show grants for 'suhana_mca'@'localhost';
++-----------------------------------------------------------------------+
+| Grants for suhana_mca@localhost                                       |
++-----------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `suhana_mca`@`localhost`                        |
+| GRANT ALL PRIVILEGES ON `mlm`.`deparment` TO `suhana_mca`@`localhost` |
++-----------------------------------------------------------------------+
+2 rows in set (0.01 sec)
+
+mysql> revoke all privileges on mlm.deparment from 'suhana_mca'@'localhost';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> grant select,insert,update,delete on mlm.department to 'suhana_mca'@'localhost';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> show grants for 'suhana_mca'@'localhost';
++----------------------------------------------------------------------------------------+
+| Grants for suhana_mca@localhost                                                        |
++----------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO `suhana_mca`@`localhost`                                         |
+| GRANT SELECT, INSERT, UPDATE, DELETE ON `mlm`.`department` TO `suhana_mca`@`localhost` |
++----------------------------------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+mysql> revoke all privileges on mlm.department from 'suhana_mca'@'localhost';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql>

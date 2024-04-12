@@ -1,0 +1,164 @@
+Adition ,subraction,multiplication and devision of any two numbers
+  
+SQL> set serveroutput on
+SQL> declare
+  2    num1 number;
+  3    num2 number;
+  4    num3 number;
+  5    begin
+  6    num1:=&num1;
+  7    num2:=&num2;
+  8    num3:=num1+num2;
+  9    dbms_output.put_line('The sum of  '||num1||'  and  '||num2||'  is  '||num3);
+ 10   num3:=num1-num2;
+ 11    dbms_output.put_line('The subtraction of  '||num1||'  and  '||num2||'  is '||num3);
+ 12    num3:=num1*num2;
+ 13    dbms_output.put_line('The multiplication of  '||num1||'  and  '||num2||'is  '||num3);
+ 14    num3:=num1/num2;
+ 15    dbms_output.put_line('The division of  '||num1||'  and  '||num2||'  is  '||num3);
+ 16    end;
+ 17    /
+   
+   output
+   
+Enter value for num1: 3
+old   6:   num1:=&num1;
+new   6:   num1:=3;
+Enter value for num2: 4
+old   7:   num2:=&num2;
+new   7:   num2:=4;
+The sum of  3  and  4  is  7
+The subtraction of  3  and  4  is -1
+The multiplication of  3  and  4is  12
+The division of  3  and  4  is  .75
+
+PL/SQL procedure successfully completed.
+
+      LARGEST AMOUNG 3 NUMBERS..
+
+SQL> set serveroutput on
+SQL> declare
+  2   x number;
+  3   y number;
+  4    z number;
+  5    begin
+  6    x:=&number1;
+  7    y:=&number2;
+  8    z:=&number3;
+  9    if x>y and x>z then
+ 10   dbms_output.put_line('x is largest');
+ 11   end if;
+ 12    if y>x and y>z then
+ 13    dbms_output.put_line('y is largest');
+ 14    end if;
+ 15   if z>x and z>y then
+ 16   dbms_output.put_line('y is largest');
+ 17   end if;
+ 18    end;
+ 19    /
+
+       OUTPUT
+
+Enter value for number1: 10
+old   6:   x:=&number1;
+new   6:   x:=10;
+Enter value for number2: 20
+old   7:   y:=&number2;
+new   7:   y:=20;
+Enter value for number3: 15
+old   8:   z:=&number3;
+new   8:   z:=15;
+y is largest
+
+PL/SQL procedure successfully completed.
+
+LARGEST AMONG THREE NUMBERS ENTERED BY THE USER
+
+SQL> set serveroutput on
+SQL> declare
+  2     x number;
+  3     y number;
+  4     z number;
+  5     begin
+  6     x:=&number1;
+  7     y:=&number2;
+  8     z:=&number3;
+  9    if x>y and x>z then
+ 10     dbms_output.put_line('x is largest');
+ 11    elsif y>x and y>z then
+ 12     dbms_output.put_line('y is largest');
+ 13     else
+ 14    dbms_output.put_line('z is largest');
+ 15    end if;
+ 16     end;
+ 17     /
+OUTPUT
+
+Enter value for number1: 12
+old   6:    x:=&number1;
+new   6:    x:=12;
+Enter value for number2: 15
+old   7:    y:=&number2;
+new   7:    y:=15;
+Enter value for number3: 20
+old   8:    z:=&number3;
+new   8:    z:=20;
+z is largest
+
+PL/SQL procedure successfully completed.
+
+
+
+                                           PROCEDURE
+
+create table dept(eid int primary key,ename varchar(30),psal int,ploc varchar(20));
+SQL> CREATE OR REPLACE PROCEDURE addemp
+  2  (depid IN dept.eid%TYPE,
+  3  depname IN dept.ename%TYPE,
+  4  depsal IN dept.psal%TYPE,
+  5  deploc IN dept.ploc%TYPE)
+  6  IS
+  7  BEGIN
+  8  INSERT INTO dept Values(depid,depname,depsal,deploc);
+  9  dbms_output.Put_line('dpmt added');
+ 10  end;
+ 11  /
+
+Procedure created.
+
+SQL> set serveroutput on
+SQL> execute addemp(3,'moye',4000,'kl');
+dpmt added
+
+PL/SQL procedure successfully completed.
+
+SQL> select * from dept;
+
+       EID ENAME                                PSAL
+---------- ------------------------------ ----------
+PLOC
+------------------------------
+         2 ashu                                 4000
+klm
+
+         3 moye                                 4000
+kl
+
+    SQUARE OF NUMBERS
+
+SQL> DECLARE
+  2       a number;
+  3    PROCEDURE squareNum(x IN OUT number) IS
+  4    BEGIN
+  5      x := x * x;
+  6    END;
+  7    BEGIN
+  8       a:= 21;
+  9       squareNum(a);
+ 10       dbms_output.put_line(' Square of (21): ' || a);
+ 11    END;
+ 12    /
+     OUTPUT
+Square of (21): 441
+
+PL/SQL procedure successfully completed.

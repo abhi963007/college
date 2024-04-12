@@ -1,0 +1,88 @@
+mysql> use mangalam;
+Database changed
+mysql> create table employee(empno int,ename varchar(39),eaddress varchar(30),ephnno int,deptname varchar(30),jobid int,salry int);
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> create table department(deptno int,empno int,empname varchar(30));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> select*from employee; 
+Empty set (0.01 sec)
+mysql> insert into employee values(1,'diya','kottayam',98785,'sales',123,20000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee values(2,'miya','kollam',965485,'HR',124,30000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into employee values(3,'siya','kochi',455485,'finance',125,60000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select*from employee;
++-------+-------+----------+--------+----------+-------+-------+
+| empno | ename | eaddress | ephnno | deptname | jobid | salry |
++-------+-------+----------+--------+----------+-------+-------+
+|     1 | diya  | kottayam |  98785 | sales    |   123 | 20000 |
+|     2 | miya  | kollam   | 965485 | HR       |   124 | 30000 |
+|     3 | siya  | kochi    | 455485 | finance  |   125 | 60000 |
++-------+-------+----------+--------+----------+-------+-------+
+3 rows in set (0.00 sec)
+alter table employee add hiredate int;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select*from employee;
++-------+-------+----------+--------+----------+-------+-------+----------+
+| empno | ename | eaddress | ephnno | deptname | jobid | salry | hiredate |
++-------+-------+----------+--------+----------+-------+-------+----------+
+|     1 | diya  | kottayam |  98785 | sales    |   123 | 20000 |     NULL |
+|     2 | miya  | kollam   | 965485 | HR       |   124 | 30000 |     NULL |
+|     3 | siya  | kochi    | 455485 | finance  |   125 | 60000 |     NULL |
++-------+-------+----------+--------+----------+-------+-------+----------+
+3 rows in set (0.00 sec)
+
+mysql> alter table employee modify column jobid varchar(30);
+Query OK, 3 rows affected (0.05 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> alter table employee rename column empno to eno;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+mysql> select*from employee;
++------+-------+----------+--------+----------+-------+-------+----------+
+| eno  | ename | eaddress | ephnno | deptname | jobid | salry | hiredate |
++------+-------+----------+--------+----------+-------+-------+----------+
+|    1 | diya  | kottayam |  98785 | sales    | 123   | 20000 |     NULL |
+|    2 | miya  | kollam   | 965485 | HR       | 124   | 30000 |     NULL |
+|    3 | siya  | kochi    | 455485 | finance  | 125   | 60000 |     NULL |
++------+-------+----------+--------+----------+-------+-------+----------+
+3 rows in set (0.00 sec)
+mysql> alter table employee modify jobid varchar(50);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+mysql> alter table employee drop column hiredate;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select*from employee;
+mysql> select*from employee;
++------+-------+----------+--------+----------+-------+-------+
+| eno  | ename | eaddress | ephnno | deptname | jobid | salry |
++------+-------+----------+--------+----------+-------+-------+
+|    1 | diya  | kottayam |  98785 | sales    | 123   | 20000 |
+|    2 | miya  | kollam   | 965485 | HR       | 124   | 30000 |
+|    3 | siya  | kochi    | 455485 | finance  | 125   | 60000 |
++------+-------+----------+--------+----------+-------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table employee rename to emp;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> truncate table emp;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> select*from employee;
+ERROR 1146 (42S02): Table 'mangalam.employee' doesn't exist
+mysql> select*from emp;
+Empty set (0.00 sec)
+mysql> drop table emp;
+Query OK, 0 rows affected (0.01 sec)

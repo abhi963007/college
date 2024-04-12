@@ -1,0 +1,18 @@
+SQL> set serveroutput on
+SQL> declare
+  2  x number;
+  3  begin
+  4  x:=&number;
+  5  if mod(x,2)=0 then
+  6  dbms_output.put_line('The number '||x||'is even');
+  7  else
+  8  dbms_output.put_line('The number  '||x||'is odd');
+  9  end if;
+ 10  end;
+ 11  /
+Enter value for number: 25
+old   4: x:=&number;
+new   4: x:=25;
+The number  25is odd
+
+PL/SQL procedure successfully completed.

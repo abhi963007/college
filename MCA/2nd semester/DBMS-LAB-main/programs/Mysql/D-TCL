@@ -1,0 +1,67 @@
+mysql> create table employee (eno int,ename varchar(70),salary int);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> start transaction;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into employee values(1,'aparna',10000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee values(2,'ahana',80000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee values(3,'diya',50000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from employee;
++------+--------+--------+
+| eno  | ename  | salary |
++------+--------+--------+
+|    1 | aparna |  10000 |
+|    2 | ahana  |  80000 |
+|    3 | diya   |  50000 |
++------+--------+--------+
+3 rows in set (0.00 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from employee;
+Empty set (0.00 sec)
+
+mysql> start transaction;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into employee values(1,'aparna',10000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into employee values(2,'ahana',80000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into employee values(3,'diya',50000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from employee;
++------+--------+--------+
+| eno  | ename  | salary |
++------+--------+--------+
+|    1 | aparna |  10000 |
+|    2 | ahana  |  80000 |
+|    3 | diya   |  50000 |
++------+--------+--------+
+3 rows in set (0.01 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from employee;
++------+--------+--------+
+| eno  | ename  | salary |
++------+--------+--------+
+|    1 | aparna |  10000 |
+|    2 | ahana  |  80000 |
+|    3 | diya   |  50000 |
++------+--------+--------+
+3 rows in set (0.00 sec)
+
+mysql

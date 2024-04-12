@@ -1,0 +1,135 @@
+        AREA OF SQUARE
+SQL> set serveroutput on
+SQL> create function square1(len int)return int is
+  2  area int(5,3);
+  3  begin
+  4  area:=(len*len);
+  5  return area;
+  6  end;
+  7  /
+
+Function created.
+
+SQL> begin
+  2  dbms_output.put_line('area='||square1(4));
+  3  end;
+  4  /
+     OUTPUT
+area=16
+
+PL/SQL procedure successfully completed.
+
+     ADDITION OF TWO NUMBERS
+
+SQL> create or replace function adder(n1 in number, n2 in number)
+  2  return number
+  3  is
+  4  n3 number(8);
+  5  begin
+  6  n3:=n1+n2;
+  7  return n3;
+  8  end;
+  9  /
+
+Function created.
+
+SQL> declare
+  2  n3 number(2);
+  3  begin
+  4  n3:=adder(11,22);
+  5  dbms_output.put_line('Addition is: '|| n3);
+  6  end;
+  7  /
+
+    OUTPUT
+Addition is: 33
+
+PL/SQL procedure successfully completed.
+
+     FUNCTION TO FIND MAXIMUM OF TWO NUMBERS
+
+SQL> set serveroutput on
+SQL> declare
+  2  a number;
+  3  b number;
+  4  c number;
+  5  function findMax(x IN number, y IN number)
+  6  return number
+  7  is
+  8  z number;
+  9  begin
+ 10  if x>y then
+ 11  z:=x;
+ 12  else
+ 13  z:=y;
+ 14  end if;
+ 15  return z;
+ 16  end;
+ 17  begin
+ 18  a:=23;
+ 19  b:=65;
+ 20  c := findMax(a, b);
+ 21  dbms_output.put_line(' Maximum of (23,45): ' || c);
+ 22  end;
+ 23  /
+ 
+     OUTPUT
+Maximum of (23,45): 65
+
+PL/SQL procedure successfully completed.
+
+           FUNCTION TO FIND TOTAL NUMBER OF CUSTOMERS IN A TABLE
+SQL> create table customers(id int,name varchar(20),dpmt varchar(20),salary int);
+
+Table created.
+
+SQL> insert into customers values(1,'sneha','mba',30000);
+
+1 row created.
+
+SQL> insert into customers values(2,'diya','mca',80000);
+
+1 row created.
+
+SQL> insert into customers values(3,'ahana','cs',90000);
+
+1 row created.
+
+SQL> insert into customers values(4,'neha','btech',70000);
+
+1 row created.
+
+SQL> select * from customers;
+
+        ID NAME                 DPMT                     SALARY
+---------- -------------------- -------------------- ----------
+         1 sneha                mba                       30000
+         2 diya                 mca                       80000
+         3 ahana                cs                        90000
+         4 neha                 btech                     70000
+
+SQL> create or replace function totalCustomers
+  2  return number is
+  3  total number(2) := 0;
+  4  begin
+  5  select count(*) into total
+  6  from customers;
+  7  return total;
+  8  end;
+  9  /
+
+Function created.
+
+SQL> declare
+  2  c number(2);
+  3  begin
+  4  c := totalCustomers();
+  5  dbms_output.put_line('Total no. of Customers: ' || c);
+  6  end;
+  7  /
+
+    OUTPUT
+Total no. of Customers: 4
+
+PL/SQL procedure successfully completed.
+         

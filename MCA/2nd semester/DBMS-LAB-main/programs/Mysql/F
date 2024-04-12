@@ -1,0 +1,119 @@
+
+mysql> use mlm;
+Database changed
+mysql> create table emp(empno int primary key,empname varchar(40),job varchar(40),basic decimal(10,2),DA decimal(10,2),pf decimal(10,2),grosspay decimal(10,2),netpay decimal(10,2));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into emp values(101,'aparna','hr',150000,0,5000,0,0);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into emp values(102,'ahana','manager',50000,0,6000,0,0);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into emp values(103,'hana','engineer',40000,0,7000,0,0);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into emp values(104,'sana','finance',45000,0,8000,0,0);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into emp values(105,'lena','hr',65000,0,9000,0,0);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select*from emp;
++-------+---------+----------+-----------+------+---------+----------+--------+
+| empno | empname | job      | basic     | DA   | pf      | grosspay | netpay |
++-------+---------+----------+-----------+------+---------+----------+--------+
+|   101 | aparna  | hr       | 150000.00 | 0.00 | 5000.00 |     0.00 |   0.00 |
+|   102 | ahana   | manager  |  50000.00 | 0.00 | 6000.00 |     0.00 |   0.00 |
+|   103 | hana    | engineer |  40000.00 | 0.00 | 7000.00 |     0.00 |   0.00 |
+|   104 | sana    | finance  |  45000.00 | 0.00 | 8000.00 |     0.00 |   0.00 |
+|   105 | lena    | hr       |  65000.00 | 0.00 | 9000.00 |     0.00 |   0.00 |
++-------+---------+----------+-----------+------+---------+----------+--------+
+5 rows in set (0.00 sec)
+
+mysql> alter emp add HRA decimal(10,2);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'emp add HRA decimal(10,2)' at line 1
+mysql> alter table emp add HRA decimal(10,2);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select*from emp;
++-------+---------+----------+-----------+------+---------+----------+--------+------+
+| empno | empname | job      | basic     | DA   | pf      | grosspay | netpay | HRA  |
++-------+---------+----------+-----------+------+---------+----------+--------+------+
+|   101 | aparna  | hr       | 150000.00 | 0.00 | 5000.00 |     0.00 |   0.00 | NULL |
+|   102 | ahana   | manager  |  50000.00 | 0.00 | 6000.00 |     0.00 |   0.00 | NULL |
+|   103 | hana    | engineer |  40000.00 | 0.00 | 7000.00 |     0.00 |   0.00 | NULL |
+|   104 | sana    | finance  |  45000.00 | 0.00 | 8000.00 |     0.00 |   0.00 | NULL |
+|   105 | lena    | hr       |  65000.00 | 0.00 | 9000.00 |     0.00 |   0.00 | NULL |
++-------+---------+----------+-----------+------+---------+----------+--------+------+
+5 rows in set (0.00 sec)
+
+mysql> update emp set Dbasic*0.30,HRA=basic*0.40,grosspay=basic+DA+HRA,netpay=grosspay-pf;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '*0.30,HRA=basic*0.40,grosspay=basic+DA+HRA,netpay=grosspay-pf' at line 1
+mysql> update emp set DA=basic*0.30,HRA=basic*0.40,grosspay=basic+DA+HRA,netpay=grosspay-pf;
+Query OK, 5 rows affected (0.01 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+mysql> select*from emp;
++-------+---------+----------+-----------+----------+---------+-----------+-----------+----------+
+| empno | empname | job      | basic     | DA       | pf      | grosspay  | netpay    | HRA      |
++-------+---------+----------+-----------+----------+---------+-----------+-----------+----------+
+|   101 | aparna  | hr       | 150000.00 | 45000.00 | 5000.00 | 255000.00 | 250000.00 | 60000.00 |
+|   102 | ahana   | manager  |  50000.00 | 15000.00 | 6000.00 |  85000.00 |  79000.00 | 20000.00 |
+|   103 | hana    | engineer |  40000.00 | 12000.00 | 7000.00 |  68000.00 |  61000.00 | 16000.00 |
+|   104 | sana    | finance  |  45000.00 | 13500.00 | 8000.00 |  76500.00 |  68500.00 | 18000.00 |
+|   105 | lena    | hr       |  65000.00 | 19500.00 | 9000.00 | 110500.00 | 101500.00 | 26000.00 |
++-------+---------+----------+-----------+----------+---------+-----------+-----------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select empno,empname,job,basic from emp where(job,basic)in(select job,MIN(basic)from emp group by job);
++-------+---------+----------+----------+
+| empno | empname | job      | basic    |
++-------+---------+----------+----------+
+|   102 | ahana   | manager  | 50000.00 |
+|   103 | hana    | engineer | 40000.00 |
+|   104 | sana    | finance  | 45000.00 |
+|   105 | lena    | hr       | 65000.00 |
++-------+---------+----------+----------+
+4 rows in set (0.01 sec)
+
+mysql> update emp set netpay=netpay+1200 where netpay<10000;
+Query OK, 0 rows affected (0.01 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select*from emp;
++-------+---------+----------+-----------+----------+---------+-----------+-----------+----------+
+| empno | empname | job      | basic     | DA       | pf      | grosspay  | netpay    | HRA      |
++-------+---------+----------+-----------+----------+---------+-----------+-----------+----------+
+|   101 | aparna  | hr       | 150000.00 | 45000.00 | 5000.00 | 255000.00 | 250000.00 | 60000.00 |
+|   102 | ahana   | manager  |  50000.00 | 15000.00 | 6000.00 |  85000.00 |  79000.00 | 20000.00 |
+|   103 | hana    | engineer |  40000.00 | 12000.00 | 7000.00 |  68000.00 |  61000.00 | 16000.00 |
+|   104 | sana    | finance  |  45000.00 | 13500.00 | 8000.00 |  76500.00 |  68500.00 | 18000.00 |
+|   105 | lena    | hr       |  65000.00 | 19500.00 | 9000.00 | 110500.00 | 101500.00 | 26000.00 |
++-------+---------+----------+-----------+----------+---------+-----------+-----------+----------+
+5 rows in set (0.00 sec)
+
+mysql>  select empno,empname,job,grosspay,from emp where grosspay between 10000 and 20000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from emp where grosspay between 10000 and 20000' at line 1
+mysql>  select empno,empname,job,grosspay,from emp where grosspay between 10000 AND 20000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from emp where grosspay between 10000 AND 20000' at line 1
+mysql> SELECT EmpNo, EmpName, GrossPay  FROM Emp  WHERE GrossPay BETWEEN 10000.00 AND 100000.00;
++-------+---------+----------+
+| EmpNo | EmpName | GrossPay |
++-------+---------+----------+
+|   102 | ahana   | 85000.00 |
+|   103 | hana    | 68000.00 |
+|   104 | sana    | 76500.00 |
++-------+---------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select*from emp where grosspay=(select MAX(grosspay)from emp);
++-------+---------+------+-----------+----------+---------+-----------+-----------+----------+
+| empno | empname | job  | basic     | DA       | pf      | grosspay  | netpay    | HRA      |
++-------+---------+------+-----------+----------+---------+-----------+-----------+----------+
+|   101 | aparna  | hr   | 150000.00 | 45000.00 | 5000.00 | 255000.00 | 250000.00 | 60000.00 |
++-------+---------+------+-----------+----------+---------+-----------+-----------+----------+
+1 row in set (0.00 sec)
+
+mysql>

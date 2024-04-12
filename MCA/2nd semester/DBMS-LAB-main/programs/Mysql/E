@@ -1,0 +1,110 @@
+mysql> create table purchase( purchaseNo int primary key, salesman varchar(50), salesmanid int,item varchar(50),amount decimal(10, 2), branch varchar(50), DOB DATE);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into purchase values(1,'vishnu',100,'bag',1000,'footwear',2005-03-12);
+ERROR 1292 (22007): Incorrect date value: '1990' for column 'DOB' at row 1
+mysql> insert into purchase values(1,'vishnu',100,'bag',1000,'footwear','2005-03-12');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into purchase values(2,'rahul',101,'shoes',2000,'footwear','1990-04-23');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into purchase values(3,'drishya',102,'ring',2000,'accesories','1997-07-25');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into purchase values(4,'manu',104,'item3',5000,'branch1','2001-09-21');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into purchase values(5,'sanu',105,'item4',500,'branch2','2005-06-10');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into purchase values(6,'siya',106,'item5',650,'branch3','2010-01-11');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from purchase;
++------------+----------+------------+-------+---------+------------+------------+
+| purchaseNo | salesman | salesmanid | item  | amount  | branch     | DOB        |
++------------+----------+------------+-------+---------+------------+------------+
+|          1 | vishnu   |        100 | bag   | 1000.00 | footwear   | 2005-03-12 |
+|          2 | rahul    |        101 | shoes | 2000.00 | footwear   | 1990-04-23 |
+|          3 | drishya  |        102 | ring  | 2000.00 | accesories | 1997-07-25 |
+|          4 | manu     |        104 | item3 | 5000.00 | branch1    | 2001-09-21 |
+|          5 | sanu     |        105 | item4 |  500.00 | branch2    | 2005-06-10 |
+|          6 | siya     |        106 | item5 |  650.00 | branch3    | 2010-01-11 |
++------------+----------+------------+-------+---------+------------+------------+
+6 rows in set (0.00 sec)
+mysql> select branch,sum(amount) as totalamount,avg(amount) as avgamount from purchase group by branch;
++------------+-------------+-------------+
+| branch     | totalamount | avgamount   |
++------------+-------------+-------------+
+| footwear   |     3000.00 | 1500.000000 |
+| accesories |     2000.00 | 2000.000000 |
+| branch1    |     5000.00 | 5000.000000 |
+| branch2    |      500.00 |  500.000000 |
+| branch3    |      650.00 |  650.000000 |
++------------+-------------+-------------+
+5 rows in set (0.01 sec)
+
+mysql> select branch,sum(amount),avg(amount) from purchase group by branch;
++------------+-------------+-------------+
+| branch     | sum(amount) | avg(amount) |
++------------+-------------+-------------+
+| footwear   |     3000.00 | 1500.000000 |
+| accesories |     2000.00 | 2000.000000 |
+| branch1    |     5000.00 | 5000.000000 |
+| branch2    |      500.00 |  500.000000 |
+| branch3    |      650.00 |  650.000000 |
++------------+-------------+-------------+
+5 rows in set (0.01 sec)
+
+mysql> select sum(amount) from purchase;
++-------------+
+| sum(amount) |
++-------------+
+|    11150.00 |
++-------------+
+1 row in set (0.01 sec)
+
+mysql> select avg(amount) from purchase;
++-------------+
+| avg(amount) |
++-------------+
+| 1858.333333 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select salesman from purchase where amount<3000;
++----------+
+| salesman |
++----------+
+| vishnu   |
+| rahul    |
+| drishya  |
+| sanu     |
+| siya     |
++----------+
+5 rows in set (0.00 sec)
+
+mysql> select COU(*) as numberOfSalesmen from purchase where amount<3000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '*) as numberOfSalesmen from purchase where amount<3000' at line 1
+mysql>
+mysql> select count(*) as numberOfSalesmen from purchase where amount<3000;
++------------------+
+| numberOfSalesmen |
++------------------+
+|                5 |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> select salesman from purchase order by salesman;
++----------+
+| salesman |
++----------+
+| drishya  |
+| manu     |
+| rahul    |
+| sanu     |
+| siya     |
+| vishnu   |
++----------+
+6 rows in set (0.01 sec)

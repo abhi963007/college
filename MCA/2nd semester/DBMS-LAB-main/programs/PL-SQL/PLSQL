@@ -1,0 +1,138 @@
+
+SQL> set serveroutput on
+SQL> begin
+  2  dbms_output.put_line('hai!...');
+  3  end;
+  4  /
+hai!...
+
+PL/SQL procedure successfully completed.
+
+SQL> declare
+  2  var1 varchar(10);
+  3  num1 int(30);
+  4  begin
+  5  var1:='hello';
+  6  num1:=100;
+  7  dbms_output.put_line('var1:'||var1);
+  8  dbms_output.put_line('num1:'||num1);
+  9  end;
+ 10  /
+var1:hello
+num1:100
+
+PL/SQL procedure successfully completed.
+
+SQL> set serveroutput on
+SQL>  CREATE OR REPLACE PROCEDURE greetings
+  2    AS
+  3    BEGIN
+  4       dbms_output.put_line('Hello World!');
+  5    END;
+  6    /
+
+Procedure created.
+
+SQL> set serveroutput on;
+SQL> declare
+  2  num number := 6;
+  3  fact number := 1;
+  4  temp number;
+  5  begin
+  6  temp :=num;
+  7  while( temp>0 )
+  8  loop
+  9  fact := fact*temp;
+ 10  temp := temp-1;
+ 11  end loop;
+ 12  dbms_output.put_line('factorial of '|| num || ' is ' || fact);
+ 13  end;
+ 14  /
+factorial of 6 is 720
+
+PL/SQL procedure successfully completed.
+
+SQL>
+SQL> declare
+  2  fac number :=1;
+  3  n number := &1;
+  4  begin
+  5  while n > 0 loop
+  6  fac:=n*fac;
+  7  n:=n-1;
+  8  end loop;
+  9  dbms_output.put_line(fac);
+ 10  end;
+ 11  /
+Enter value for 1: 23
+old   3: n number := &1;
+new   3: n number := 23;
+25852016738884976640000
+
+PL/SQL procedure successfully completed.
+
+SQL> declare
+  2  fac number :=1;
+  3  n number := &1;
+  4  begin
+  5  while n > 0 loop
+  6  fac:=n*fac;
+  7  n:=n-1;
+  8  end loop;
+  9  dbms_output.put_line(fac);
+ 10  end;
+ 11  /
+Enter value for 1: 6
+old   3: n number := &1;
+new   3: n number := 6;
+720
+
+PL/SQL procedure successfully completed.
+
+SQL> declare
+  2
+  3  -- declare variable x, y
+  4  -- and z of datatype number
+  5  x number(5);
+  6  y number(5);
+  7  z number(7);
+  8
+  9  begin
+ 10
+ 11  -- Here we Assigning 10 into x
+ 12  x:=10;
+ 13
+ 14  -- Assigning 20 into x
+ 15  y:=20;
+ 16
+ 17  -- Assigning sum of x and y into z
+ 18  z:=x+y;
+ 19
+ 20  -- Print the Result
+ 21  dbms_output.put_line('Sum is '||z);
+ 22  end;
+ 23  /
+Sum is 30
+
+PL/SQL procedure successfully completed.
+
+SQL> Declare
+  2  Var1 integer;
+  3  Var2 integer;
+  4  Var3 integer;
+  5  Begin
+  6  Var1:=&var1;
+  7  Var2:=&var2;
+  8  Var3:=var1+var2;
+  9  Dbms_output.put_line(var3);
+ 10  End;
+ 11  /
+Enter value for var1: 30
+old   6: Var1:=&var1;
+new   6: Var1:=30;
+Enter value for var2: 70
+old   7: Var2:=&var2;
+new   7: Var2:=70;
+100
+
+PL/SQL procedure successfully completed.

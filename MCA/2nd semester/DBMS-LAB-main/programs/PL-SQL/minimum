@@ -1,0 +1,23 @@
+
+SQL> DECLARE
+  2      a number;
+  3      b number;
+  4      c number;
+  5   PROCEDURE findMin(x IN number, y IN number, z OUT number) IS
+  6   BEGIN
+  7       IF x < y THEN
+  8         z:= x;
+  9      ELSE
+ 10          z:= y;
+ 11      END IF;
+ 12    END;
+ 13    BEGIN
+ 14       a:= 31;
+ 15       b:= 56;
+ 16       findMin(a, b, c);
+ 17      dbms_output.put_line(' Minimum of (31,56: ' || c);
+ 18    END;
+ 19   /
+Minimum of (31,56):_31
+
+PL/SQL procedure successfully completed.
