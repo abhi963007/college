@@ -1,24 +1,19 @@
-import java.util.LinkedList;
-
-class RemoveAllElementsFromLinkedList {
+public class CommandLineSum {
     public static void main(String[] args) {
-        // Create a linked list
-        LinkedList<String> linkedList = new LinkedList<>();
+        int sum = 0;
+        int invalidCount = 0;
 
-        // Add elements to the linked list
-        linkedList.add("Apple");
-        linkedList.add("Banana");
-        linkedList.add("Orange");
-        linkedList.add("Mango");
+        for (String arg : args) {
+            try {
+                int num = Integer.parseInt(arg);
+                sum += num;
+            } catch (NumberFormatException e) {
+                // If parsing fails, increment invalidCount
+                invalidCount++;
+            }
+        }
 
-        // Display the linked list before removal
-        System.out.println("Linked List before removal: " + linkedList);
-
-        // Remove all elements from the linked list
-        linkedList.clear();
-
-        // Display the linked list after removal
-        System.out.println("Linked List after removal: " + linkedList);
+        System.out.println("Sum of valid integers: " + sum);
+        System.out.println("Number of invalid integers: " + invalidCount);
     }
 }
-
