@@ -1,0 +1,39 @@
+import numpy as np
+
+A = np.array([[1, 2], [3, 4]])
+B = np.array([[5, 6], [7, 8]])
+
+# Addition
+def addition(A, B):
+    return np.add(A, B)
+print("THE SUM OF THE MATRIX IS = \n", addition(A, B))
+
+# Subtraction
+def subtraction(A, B):
+    return np.subtract(A, B)
+print("THE DIFFERENCE OF THE MATRIX IS = \n", subtraction(A, B))
+
+# Element-wise Multiplication
+def multiplication(A, B):
+    return np.multiply(A, B)
+print("THE ELEMENT-WISE MULTIPLICATION OF THE TWO MATRIX IS = \n", multiplication(A, B))
+
+# Matrix Multiplication using dot product
+def matrix_dot_product(A, B):
+    return np.dot(A, B)
+print("THE MATRIX MULTIPLICATION OF THE TWO MATRIX USING DOT PRODUCT IS = \n", matrix_dot_product(A, B))
+
+# Matrix Transpose
+def matrix_transpose(A):
+    return np.transpose(A)
+print("THE TRANSPOSE OF THE MATRIX A IS = \n", matrix_transpose(A))
+
+# Matrix Determinant
+def matrix_determinant(A):
+    return np.linalg.det(A)
+print("THE DETERMINANT OF THE MATRIX A IS = ", matrix_determinant(A))
+
+# Sum of Diagonal Elements
+def sum_of_diagonal_matrix(A):
+    return np.trace(A)
+print("THE SUM OF DIAGONAL ELEMENTS OF MATRIX A IS = ", sum_of_diagonal_matrix(A))
