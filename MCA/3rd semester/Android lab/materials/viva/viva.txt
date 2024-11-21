@@ -1,0 +1,87 @@
+### 1. *What is Android?*
+   - *Answer:* Android is an open-source mobile operating system primarily developed by Google. It is based on the Linux kernel and is used for developing applications on mobile devices like smartphones, tablets, and wearable devices.
+
+### 2. *What are the core components of an Android application?*
+   - *Answer:* The core components of an Android application are:
+     - *Activity*: Represents a single screen in the app.
+     - *Service*: A background task that runs indefinitely.
+     - *Broadcast Receiver*: Listens for and responds to system-wide broadcast announcements.
+     - *Content Provider*: Manages access to shared data.
+
+### 3. *What is an Activity in Android?*
+   - *Answer:* An Activity represents a single screen with a user interface. It serves as an entry point for the user to interact with the app. Activities are managed by the ActivityManager and typically handle user inputs and interactions.
+
+### 4. *What is the Android Manifest file?*
+   - *Answer:* The Android Manifest file (AndroidManifest.xml) is an essential configuration file that contains information about the app, such as its components (activities, services, etc.), permissions required, and other metadata like the app's package name and version code.
+
+### 5. *What is the difference between Service and IntentService in Android?*
+   - *Answer:* 
+     - *Service*: A Service is a component that runs in the background to perform long-running operations, but it runs on the main thread by default, which can cause issues with performance or UI responsiveness.
+     - *IntentService*: A subclass of Service, designed to handle asynchronous requests on a worker thread. It automatically stops itself after processing all work.
+
+### 6. *What is an Intent in Android?*
+   - *Answer:* An Intent is an object used to request an action from another app component (such as starting an activity or service). Intents are also used for inter-component communication within an app.
+
+### 7. *Explain the Android Activity Lifecycle.*
+   - *Answer:* The Android Activity lifecycle consists of several states:
+     - onCreate(): Called when the activity is first created.
+     - onStart(): Called when the activity becomes visible.
+     - onResume(): Called when the activity is in the foreground and ready for user interaction.
+     - onPause(): Called when another activity is in the foreground or when the activity is partially obscured.
+     - onStop(): Called when the activity is no longer visible.
+     - onRestart(): Called when the activity is re-started after being stopped.
+     - onDestroy(): Called before the activity is destroyed, either due to user action or system needs.
+
+### 8. *What are the different types of Android layouts?*
+   - *Answer:*
+     - *LinearLayout*: Arranges children in a single horizontal or vertical row.
+     - *RelativeLayout*: Allows positioning of child elements relative to each other or to the parent.
+     - *ConstraintLayout*: A more flexible and performant layout, allowing you to define relationships between child views using constraints.
+     - *FrameLayout*: Designed for stacking views on top of each other.
+     - *TableLayout*: Arranges children in rows and columns, similar to a table.
+     - *GridLayout*: Arranges children in a grid of rows and columns.
+
+### 9. *What is a Content Provider in Android?*
+   - *Answer:* A Content Provider is a component that manages access to a central repository of data (e.g., contacts, media) and makes it accessible to other applications. It abstracts the data storage mechanism, allowing data sharing across apps.
+
+### 10. *What is an AsyncTask in Android?*
+   - *Answer:* AsyncTask is a class used to perform background operations in a separate thread, while allowing interaction with the main UI thread. It simplifies operations like network calls or database queries that need to run in the background.
+
+### 11. *What are Permissions in Android?*
+   - *Answer:* Permissions in Android are requests made by an application to access protected features or data on the device (e.g., accessing the camera, contacts, location, etc.). Permissions can be classified as either *normal* (automatically granted) or *dangerous* (must be explicitly granted by the user at runtime).
+
+### 12. *What is the difference between dp and sp in Android?*
+   - *Answer:*
+     - *dp (Density-independent Pixels)*: A unit of measurement used to ensure that the UI elements appear the same size across different screen densities.
+     - *sp (Scale-independent Pixels)*: Similar to dp, but also takes the user's font size preferences into account, ensuring accessibility for users with different text scaling preferences.
+
+### 13. *What is the ViewHolder pattern in Android?*
+   - *Answer:* The ViewHolder pattern is used to optimize ListView or RecyclerView performance by avoiding unnecessary calls to findViewById(). It involves creating a static inner class to hold references to views, which are then reused as the list is scrolled.
+
+### 14. *What is a RecyclerView in Android?*
+   - *Answer:* RecyclerView is a flexible and efficient view for displaying large sets of data in the form of lists or grids. It is a more advanced version of ListView and is designed to handle large datasets by recycling views and only rendering the visible ones.
+
+### 15. *What is the role of the onCreate() method in an Activity?*
+   - *Answer:* The onCreate() method is called when the activity is first created. It is where you initialize the activity, set up the layout (usually using setContentView()), and bind data or set up listeners.
+
+### 16. *Explain the difference between Serializable and Parcelable in Android.*
+   - *Answer:*
+     - *Serializable*: A standard Java interface that enables an object to be converted into a byte stream. It's slower than Parcelable and requires more memory.
+     - *Parcelable*: An Android-specific interface that allows objects to be more efficiently serialized, making it ideal for passing objects between components (such as activities) through intents.
+
+### 17. *What are the different types of broadcast receivers in Android?*
+   - *Answer:* 
+     - *Normal Broadcast*: Sent to all interested receivers, without guaranteeing ordered delivery.
+     - *Ordered Broadcast*: Sent to one receiver at a time, allowing other receivers to modify the broadcast or stop it.
+     - *Sticky Broadcast*: A broadcast that is retained by the system after it is broadcasted, so future receivers can access the broadcast.
+
+### 18. *What is an Android Emulator?*
+   - *Answer:* An Android Emulator is a virtual device used to run and test Android applications on a computer without requiring a physical Android device. It replicates the features and functions of an actual Android device.
+
+### 19. *What is the purpose of the onPause() method in Android?*
+   - *Answer:* The onPause() method is called when the activity is no longer in the foreground but is still partially visible. It is used to save application data, release resources, and prepare for the activity being stopped or resumed.
+
+### 20. *What is a Handler in Android?*
+   - *Answer:* A Handler is used to send and process Message and Runnable objects associated with a thread’s MessageQueue. It allows communication between threads, especially when performing background tasks and updating the UI from a worker thread.    
+
+
